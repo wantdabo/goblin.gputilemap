@@ -55,7 +55,7 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // 读取数据体中 rgba
+                // 读取数据图中 rgba
                 // r 表示 自身 x
                 // g 表示 自身 y
                 // b 表示映射采样图 x
@@ -63,7 +63,7 @@
                 // 注意，此处的 x，y 均为贴图的左下角
                 fixed4 dataTileMapCol = tex2D(_TilemapTex, i.uv);
 
-                // 计算，mesh uv 移除自身左下角的 uv 值。
+                // 计算，mesh uv 自身左下角的溢出 uv 值。
                 fixed2 overflowUv = i.uv - dataTileMapCol.rg;
 
                 // 溢出的部分，用来 / block 的缩放比例。得到缩放比例，用来映射采样图的 uv 比例。
