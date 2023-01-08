@@ -19,7 +19,7 @@
 ## [github](https://github.com/wantdabo/goblin.gputilemap)
 
 # 此处，我们先看下效果图。
-![155]( http://www.bookshelf.link/usr/uploads/2023/01/3371562450.png)
+![155]( ./Image/Sample_1.png)
 
 你应该能看见，Unity Stats 的三角面只有 2 个，顶点数只有 4 个。
 PS：Unity 它自身就有 2 个三角面与 4 个顶点的开销。所以我们需要简单做下减法就能得到我们业务开销的数值。
