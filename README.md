@@ -63,27 +63,27 @@ Color 是如何构成的呢？
 ``` shader lab
 fixed4 frag (v2f i) : SV_Target
 {
-		// 读取数据图中 rgba
-		// r 表示 自身 x
-		// g 表示 自身 y
-		// b 表示映射采样图 x
-		// a 表示映射采样图 y
-		// 注意，此处的 x，y 均为贴图的左下角
-		fixed4 dataTileMapCol = tex2D(_TilemapTex, i.uv);
+	// 读取数据图中 rgba
+	// r 表示 自身 x
+	// g 表示 自身 y
+	// b 表示映射采样图 x
+	// a 表示映射采样图 y
+	// 注意，此处的 x，y 均为贴图的左下角
+	fixed4 dataTileMapCol = tex2D(_TilemapTex, i.uv);
 
-		// 计算，mesh uv 自身左下角的溢出 uv 值。
-		fixed2 overflowUv = i.uv - dataTileMapCol.rg;
+	// 计算，mesh uv 自身左下角的溢出 uv 值。
+	fixed2 overflowUv = i.uv - dataTileMapCol.rg;
 
-		// 溢出的部分，用来 / block 的缩放比例。得到缩放比例，用来映射采样图的 uv 比例。
-		fixed2 scaleUv = overflowUv / _TilemapBlockRate;
+	// 溢出的部分，用来 / block 的缩放比例。得到缩放比例，用来映射采样图的 uv 比例。
+	fixed2 scaleUv = overflowUv / _TilemapBlockRate;
 
-		// 映射采样图比例
-		fixed2 mapping2SampleUv = scaleUv * _SampleBlockRate;
+	// 映射采样图比例
+	fixed2 mapping2SampleUv = scaleUv * _SampleBlockRate;
 
-		// 开始最终采样，这是一个加法，需要加上 ba 采样的 uv 偏移，以及映射的比例即可。
-		fixed4 col = tex2D(_MainTex, dataTileMapCol.ba + mapping2SampleUv);
+	// 开始最终采样，这是一个加法，需要加上 ba 采样的 uv 偏移，以及映射的比例即可。
+	fixed4 col = tex2D(_MainTex, dataTileMapCol.ba + mapping2SampleUv);
 
-		return col;
+	return col;
 }
 ```
 
